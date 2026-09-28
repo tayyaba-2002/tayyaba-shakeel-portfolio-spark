@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   Menu, X, ArrowRight, Download, Bot, MessageCircle, Workflow, LayoutGrid, FileSearch, Mail, ArrowDown, Check, Linkedin, Github,
 } from "lucide-react";
-import resumeAsset from "@/assets/resume.pdf.asset.json";
+import resumeAsset from "./assets/resume.pdf.asset.json";
 
 const EMAIL = "Tayyabashakeel2002@gmail.com";
 const PHOTO = "https://i.imgur.com/2bVpLsq.jpeg";
