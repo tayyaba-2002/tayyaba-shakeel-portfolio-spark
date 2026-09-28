@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {
-  Menu, X, ArrowRight, Download, Bot, MessageCircle, Workflow, LayoutGrid, FileSearch, Mail, ArrowDown, Check,
+  Menu, X, ArrowRight, Download, Bot, MessageCircle, Workflow, LayoutGrid, FileSearch, Mail, ArrowDown, Check, Linkedin, Github,
 } from "lucide-react";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 
 const EMAIL = "Tayyabashakeel2002@gmail.com";
 const PHOTO = "https://i.imgur.com/2bVpLsq.jpeg";
@@ -54,7 +55,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a href="#projects" className="btn-primary">View My Work <ArrowRight size={16} /></a>
             <a href="#contact" className="btn-ghost">Let's Work Together</a>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-2 text-sm text-muted hover:text-accent">
+            <a href={resumeAsset.url} target="_blank" rel="noreferrer" download className="inline-flex items-center gap-2 px-2 text-sm text-muted hover:text-accent">
               <Download size={14} /> Resume
             </a>
           </div>
@@ -283,6 +284,16 @@ function Contact() {
         <h2 className="mt-3 text-3xl font-semibold md:text-5xl">Let's build a smarter workflow.</h2>
         <p className="mt-5 text-muted">Have a repetitive process, manual task, or business workflow that could be automated? Let's turn it into a practical system.</p>
         <a href={`mailto:${EMAIL}`} className="mt-8 inline-flex items-center gap-2 text-sm hover:text-accent"><Mail size={16} />{EMAIL}</a>
+        <div className="mt-5 flex items-center gap-4">
+          <a href="https://www.linkedin.com/in/tayyaba-shakeel-bb8a00253" target="_blank" rel="noreferrer" aria-label="LinkedIn"
+            className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent">
+            <Linkedin size={18} /> LinkedIn
+          </a>
+          <a href="https://github.com/tayyaba-2002" target="_blank" rel="noreferrer" aria-label="GitHub"
+            className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent">
+            <Github size={18} /> GitHub
+          </a>
+        </div>
       </div>
       <form onSubmit={submit} className="card space-y-4 hover:border-line">
         <label className="block text-sm">Name<input name="name" required className={`${input} mt-1`} /></label>
