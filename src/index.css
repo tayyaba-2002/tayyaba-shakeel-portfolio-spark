@@ -20,6 +20,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { @apply m-0 bg-bg font-sans text-ink antialiased; }
+section[id] { scroll-margin-top: 4rem; }
 h1, h2, h3 { @apply font-display; letter-spacing: 0; }
 a, button, input, textarea { @apply transition-colors; }
 button, a { -webkit-tap-highlight-color: transparent; }
