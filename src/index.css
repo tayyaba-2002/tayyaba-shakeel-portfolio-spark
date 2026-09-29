@@ -3,32 +3,76 @@
 @tailwind utilities;
 
 :root {
-  --bg: 220 18% 7%;
-  --surface: 220 16% 10%;
-  --line: 220 12% 18%;
-  --fg: 40 20% 94%;
-  --muted: 220 8% 62%;
-  --accent: 158 64% 52%;
-  --accent-fg: 220 18% 7%;
+  --bg: 42 33% 98%;
+  --surface: 210 25% 96%;
+  --line: 215 19% 87%;
+  --ink: 222 47% 12%;
+  --ink-elevated: 220 35% 17%;
+  --ink-inverse: 42 33% 98%;
+  --muted: 215 16% 43%;
+  --primary: 217 79% 48%;
+  --primary-soft: 207 94% 70%;
+  --success: 158 68% 34%;
+  --warning: 23 92% 69%;
+  --shadow-lift: 0 18px 50px -28px hsl(222 47% 12% / 0.35);
 }
 
+* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { @apply bg-bg text-fg font-sans antialiased; }
-h1, h2, h3 { @apply font-display; }
+body { @apply m-0 bg-bg font-sans text-ink antialiased; }
+h1, h2, h3 { @apply font-display; letter-spacing: 0; }
+a, button, input, textarea { @apply transition-colors; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { @apply bg-primary text-ink-inverse; }
 
-.grid-bg {
+.shell { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
+.section { @apply py-20 sm:py-24 lg:py-28; }
+.kicker { @apply font-mono text-[11px] font-bold uppercase text-primary; letter-spacing: 0.14em; }
+
+.hero-grid {
   background-image:
-    linear-gradient(hsl(var(--line) / 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--line) / 0.5) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 70% 40%, black 20%, transparent 70%);
+    linear-gradient(hsl(var(--line) / .55) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--line) / .55) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to right, transparent, black 38%, black 100%);
 }
 
-@layer components {
-  .btn-primary { @apply inline-flex items-center gap-2 rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-accent-fg transition hover:opacity-90; }
-  .btn-ghost { @apply inline-flex items-center gap-2 rounded-md border border-line px-5 py-2.5 text-sm font-medium text-fg transition hover:border-accent hover:text-accent; }
-  .eyebrow { @apply font-mono text-xs uppercase tracking-[0.2em] text-accent; }
-  .section { @apply mx-auto max-w-6xl px-5 py-24; }
-  .card { @apply rounded-xl border border-line bg-surface p-6 transition hover:border-accent/60; }
-  .chip { @apply rounded border border-line px-2 py-0.5 font-mono text-[11px] text-muted; }
+.portrait-frame { @apply relative aspect-[4/5] overflow-hidden rounded-md border border-line bg-surface shadow-lift; }
+.nav-link { @apply text-sm font-medium text-muted hover:text-ink; }
+.icon-button { @apply inline-grid size-10 place-items-center rounded-md border border-line bg-bg text-ink hover:border-primary hover:text-primary; }
+.text-link { @apply inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary; }
+
+.action { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2; }
+.action-primary { @apply bg-primary text-ink-inverse hover:bg-ink; }
+.action-secondary { @apply border border-line bg-bg text-ink hover:border-ink; }
+.action-quiet { @apply bg-surface text-ink hover:bg-line; }
+
+.section-heading { @apply grid gap-6 lg:grid-cols-2 lg:items-end; }
+.section-heading h2 { @apply mt-3 text-4xl font-semibold leading-tight text-ink sm:text-5xl; }
+.section-heading > p { @apply max-w-xl text-base leading-7 text-muted lg:justify-self-end; }
+
+dl dt { @apply mb-1 font-mono text-[11px] font-bold uppercase text-ink; letter-spacing: .08em; }
+dl dd { @apply text-muted; }
+dl .result { @apply rounded-md border border-success/20 bg-success/5 p-4; }
+dl .result dt { @apply flex items-center gap-2 text-success; }
+.tag { @apply rounded border border-line bg-surface px-2.5 py-1 font-mono text-[11px] text-muted; }
+
+.capability-card { @apply flex min-h-72 flex-col rounded-md border border-line bg-bg p-6; }
+.capability-icon { @apply grid size-10 place-items-center rounded-md bg-primary/10 text-primary; }
+.capability-card h3 { @apply mt-6 text-xl font-semibold text-ink; }
+.capability-card > p:not(:last-child) { @apply mt-3 leading-7 text-muted; }
+
+.timeline-item { @apply relative; }
+.timeline-icon { @apply absolute -left-[3.9rem] top-0 grid size-9 place-items-center rounded-full border border-line bg-bg text-primary sm:-left-[4.85rem]; }
+.timeline-item h3 { @apply mt-2 text-xl font-semibold text-ink; }
+.timeline-item .meta { @apply mt-1 text-sm font-medium text-primary; }
+.timeline-item > p:last-child { @apply mt-4 leading-7 text-muted; }
+
+.contact-link { @apply flex items-center gap-3 text-ink-inverse/70 hover:text-ink-inverse; }
+.field-label { @apply block text-sm font-semibold text-ink-inverse/80; }
+.field { @apply mt-2 w-full rounded-md border border-ink-inverse/15 bg-ink px-3.5 py-3 text-sm font-normal text-ink-inverse outline-none placeholder:text-ink-inverse/35 focus:border-primary-soft focus:ring-1 focus:ring-primary-soft; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }

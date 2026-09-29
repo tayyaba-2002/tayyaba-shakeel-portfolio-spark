@@ -1,35 +1,90 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import {
-  Menu, X, ArrowRight, Download, Bot, MessageCircle, Workflow, LayoutGrid, FileSearch, Mail, ArrowDown, Check, Linkedin, Github,
+  ArrowDown,
+  ArrowRight,
+  Bot,
+  BriefcaseBusiness,
+  Check,
+  ChevronRight,
+  Code2,
+  Database,
+  Download,
+  ExternalLink,
+  Github,
+  GraduationCap,
+  Layers3,
+  Linkedin,
+  Mail,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Sparkles,
+  Workflow,
+  X,
 } from "lucide-react";
 import resumeAsset from "./assets/resume.pdf.asset.json";
 
 const EMAIL = "Tayyabashakeel2002@gmail.com";
 const PHOTO = "https://i.imgur.com/2bVpLsq.jpeg";
-const nav = ["Home", "About", "Services", "Projects", "Skills", "Contact"];
+const LINKEDIN = "https://www.linkedin.com/in/tayyaba-shakeel-bb8a00253";
+const GITHUB = "https://github.com/tayyaba-2002";
 
-function Nav() {
+const navigation = [
+  ["Work", "work"],
+  ["Capabilities", "capabilities"],
+  ["About", "about"],
+  ["Contact", "contact"],
+];
+
+type ActionLinkProps = {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "quiet";
+  external?: boolean;
+  download?: boolean;
+};
+
+function ActionLink({ href, children, variant = "primary", external, download }: ActionLinkProps) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      download={download}
+      className={`action action-${variant}`}
+    >
+      {children}
+    </a>
+  );
+}
+
+function Navigation() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#home" className="font-display text-lg font-semibold">TS<span className="text-accent">.</span></a>
-        <nav className="hidden gap-7 md:flex">
-          {nav.map((n) => (
-            <a key={n} href={`#${n.toLowerCase()}`} className="text-sm text-muted hover:text-fg">{n}</a>
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-bg/90 backdrop-blur-xl">
+      <div className="shell flex h-16 items-center justify-between">
+        <a href="#top" className="flex items-center gap-2 font-display text-sm font-bold text-ink" aria-label="Tayyaba Shakeel, home">
+          <span className="grid size-8 place-items-center rounded-md bg-ink text-xs text-ink-inverse">TS</span>
+          <span className="hidden sm:inline">Tayyaba Shakeel</span>
+        </a>
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+          {navigation.map(([label, id]) => (
+            <a key={id} href={`#${id}`} className="nav-link">{label}</a>
           ))}
         </nav>
-        <a href="#contact" className="btn-primary hidden md:inline-flex">Let's Work Together</a>
-        <button className="md:hidden" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
-          {open ? <X /> : <Menu />}
+        <div className="hidden md:block">
+          <ActionLink href="#contact" variant="primary">Start a project <ArrowRight size={15} /></ActionLink>
+        </div>
+        <button className="icon-button md:hidden" type="button" onClick={() => setOpen((value) => !value)} aria-label="Toggle navigation" aria-expanded={open}>
+          {open ? <X size={19} /> : <Menu size={19} />}
         </button>
       </div>
       {open && (
-        <nav className="flex flex-col gap-4 border-t border-line px-5 py-5 md:hidden">
-          {nav.map((n) => (
-            <a key={n} href={`#${n.toLowerCase()}`} onClick={() => setOpen(false)} className="text-muted hover:text-fg">{n}</a>
+        <nav className="shell flex flex-col gap-1 border-t border-line py-3 md:hidden" aria-label="Mobile navigation">
+          {navigation.map(([label, id]) => (
+            <a key={id} href={`#${id}`} onClick={() => setOpen(false)} className="rounded-md px-3 py-3 text-sm font-medium text-muted hover:bg-surface hover:text-ink">{label}</a>
           ))}
-          <a href="#contact" onClick={() => setOpen(false)} className="btn-primary justify-center">Let's Work Together</a>
         </nav>
       )}
     </header>
@@ -37,42 +92,238 @@ function Nav() {
 }
 
 function Hero() {
-  const flow = ["Inquiry", "AI parse", "n8n workflow", "Database", "Dashboard"];
   return (
-    <section id="home" className="relative overflow-hidden">
-      <div className="grid-bg pointer-events-none absolute inset-0" />
-      <div className="section relative grid items-center gap-14 md:grid-cols-[1.3fr_1fr]">
+    <section id="top" className="relative overflow-hidden border-b border-line">
+      <div className="hero-grid pointer-events-none absolute inset-0" />
+      <div className="shell relative grid min-h-[calc(100vh-4rem)] content-center gap-12 py-16 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:py-20">
         <div>
-          <p className="eyebrow">AI Automation • Software Engineering • Business Systems</p>
-          <p className="mt-6 text-lg text-muted">Tayyaba Shakeel</p>
-          <h1 className="mt-2 text-4xl font-bold leading-tight md:text-6xl">
-            AI Automation Specialist <span className="text-muted">|</span> Software Engineer
+          <div className="mb-7 flex items-center gap-2 text-xs font-bold uppercase text-success">
+            <span className="size-2 rounded-full bg-success" />
+            Founder, Next Level AI Automation &amp; Services
+          </div>
+          <p className="kicker">Automation Specialist · Software Engineer</p>
+          <h1 className="mt-4 max-w-4xl text-5xl font-bold leading-[1.02] text-ink sm:text-6xl lg:text-7xl">
+            I turn manual work into <span className="text-primary">systems that run.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted">
-            I build AI-powered automations and software solutions that help businesses reduce repetitive work,
-            streamline operations, and turn manual processes into scalable systems.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted">
+            I design AI-powered workflows, WhatsApp automations, and practical business tools—from the first bottleneck to a working launch.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#projects" className="btn-primary">View My Work <ArrowRight size={16} /></a>
-            <a href="#contact" className="btn-ghost">Let's Work Together</a>
-            <a href={resumeAsset.url} target="_blank" rel="noreferrer" download className="inline-flex items-center gap-2 px-2 text-sm text-muted hover:text-accent">
-              <Download size={14} /> Resume
-            </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ActionLink href="#work">Explore selected work <ArrowDown size={15} /></ActionLink>
+            <ActionLink href="#contact" variant="secondary">Discuss your workflow</ActionLink>
+          </div>
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href={resumeAsset.url} target="_blank" rel="noreferrer" download className="text-link"><Download size={15} /> Résumé</a>
+            <a href={LINKEDIN} target="_blank" rel="noreferrer" className="text-link"><Linkedin size={15} /> LinkedIn</a>
+            <a href={GITHUB} target="_blank" rel="noreferrer" className="text-link"><Github size={15} /> GitHub</a>
           </div>
         </div>
-        <div className="space-y-4">
-          <img src={PHOTO} alt="Tayyaba Shakeel" className="aspect-square w-full max-w-sm rounded-xl border border-line object-cover" />
-          <div className="card max-w-sm p-4">
-            <p className="font-mono text-[11px] text-muted">workflow.run()</p>
-            <div className="mt-3 flex flex-wrap items-center gap-1.5">
-              {flow.map((f, i) => (
-                <span key={f} className="flex items-center gap-1.5">
-                  <span className="chip text-fg">{f}</span>
-                  {i < flow.length - 1 && <ArrowRight size={12} className="text-accent" />}
-                </span>
-              ))}
+
+        <div className="relative mx-auto w-full max-w-md lg:mr-0">
+          <div className="portrait-frame">
+            <img src={PHOTO} alt="Tayyaba Shakeel" className="h-full w-full object-cover object-top" />
+            <div className="absolute inset-x-4 bottom-4 rounded-md bg-ink/90 p-4 text-ink-inverse backdrop-blur">
+              <p className="text-sm font-semibold">Based in Ras Al Khaimah, UAE</p>
+              <p className="mt-1 text-xs text-ink-inverse/70">Building for small businesses and ambitious teams.</p>
             </div>
           </div>
+          <div className="absolute -bottom-6 -left-5 hidden w-56 rounded-md border border-line bg-bg p-4 shadow-lift sm:block">
+            <p className="kicker">Current focus</p>
+            <p className="mt-2 text-sm font-semibold text-ink">WhatsApp · AI agents · operational workflows</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProofStrip() {
+  const items = [
+    ["01", "Founder-led", "From discovery to delivery"],
+    ["02", "Business-first", "Built around the real process"],
+    ["03", "Full-stack", "Automation, data, and interface"],
+    ["04", "Client-ready", "Systems designed to be used"],
+  ];
+  return (
+    <section aria-label="Working principles" className="border-b border-line bg-ink text-ink-inverse">
+      <div className="shell grid sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(([number, title, detail]) => (
+          <div key={number} className="border-b border-ink-inverse/10 py-6 sm:border-r sm:px-6 sm:first:pl-0 lg:border-b-0">
+            <p className="font-mono text-xs text-primary-soft">{number}</p>
+            <p className="mt-2 font-display font-semibold">{title}</p>
+            <p className="mt-1 text-sm text-ink-inverse/60">{detail}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+type Project = {
+  title: string;
+  type: string;
+  challenge: string;
+  build: string;
+  outcome: string;
+  tools: string[];
+  link?: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Zahra WhatsApp AI Booking Chatbot",
+    type: "Conversational automation",
+    challenge: "Turn a customer conversation into a complete booking without losing context between tools.",
+    build: "An end-to-end flow connecting a webhook, Google Sheets lookup, AI agent, WhatsApp replies, and booking confirmation.",
+    outcome: "A practical booking journey built around the channel customers already use.",
+    tools: ["n8n", "WhatsApp API", "Google Sheets", "AI agent"],
+  },
+  {
+    title: "Camaro Taxi Dispatch System",
+    type: "Operations system",
+    challenge: "Give a taxi business a clearer way to coordinate dispatch, notifications, and performance tracking.",
+    build: "A tested AppSheet dispatch dashboard and automation plan spanning WhatsApp, SMS, Viber, and email.",
+    outcome: "One operational view for dispatch activity, large datasets, and KPI visibility.",
+    tools: ["AppSheet", "Google Sheets", "n8n", "KPI tracking"],
+  },
+  {
+    title: "WhatsApp-to-Sheets Expense Tracker",
+    type: "Field workflow",
+    challenge: "Field expense messages arrive as unstructured text and are difficult to report consistently.",
+    build: "A WhatsApp flow that parses free-text worker messages into structured Google Sheets records.",
+    outcome: "Cleaner expense capture without asking field teams to adopt a complex new tool.",
+    tools: ["Manychat", "WhatsApp API", "Google Sheets", "REGEXEXTRACT"],
+  },
+  {
+    title: "MAAC Consultancy Website",
+    type: "Client web project",
+    challenge: "An Abu Dhabi auditing firm needed a credible, responsive digital presence.",
+    build: "A Vite and React single-page website designed, developed, and deployed for the client.",
+    outcome: "A clear online home that presents the firm professionally across screen sizes.",
+    tools: ["React", "Vite", "Web design", "Netlify"],
+    link: "https://maac-consultancy.netlify.app/",
+  },
+  {
+    title: "Tap-to-Generate Daily Log",
+    type: "AI product prototype",
+    challenge: "Daily activity notes are useful, but writing them repeatedly adds friction.",
+    build: "A focused one-tap application that uses Gemini to turn simple inputs into a structured daily log.",
+    outcome: "A small AI tool that makes consistent documentation easier.",
+    tools: ["React", "Gemini API", "Prompt design", "Lovable"],
+    link: "https://log-companion-ai.lovable.app",
+  },
+  {
+    title: "WordsWorth E-commerce Platform",
+    type: "Software engineering",
+    challenge: "Book supply was fragmented across regions and needed a more unified purchasing experience.",
+    build: "A university team project where I led requirements analysis, system architecture, and stakeholder presentation.",
+    outcome: "A complete platform concept grounded in research, architecture, and user needs.",
+    tools: ["Requirements", "System architecture", "E-commerce", "Team leadership"],
+  },
+];
+
+function Work() {
+  return (
+    <section id="work" className="section bg-bg">
+      <div className="shell">
+        <div className="section-heading">
+          <div>
+            <p className="kicker">Selected work</p>
+            <h2>Real processes. Practical systems.</h2>
+          </div>
+          <p>Each project starts with a workflow that is slow, fragmented, or difficult to scale—and turns it into something clearer.</p>
+        </div>
+        <div className="mt-12 grid gap-px overflow-hidden rounded-md border border-line bg-line lg:grid-cols-2">
+          {projects.map((project, index) => (
+            <article key={project.title} className="group bg-bg p-6 transition-colors hover:bg-surface sm:p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-xs text-primary">0{index + 1} / {project.type}</p>
+                  <h3 className="mt-3 text-2xl font-semibold text-ink">{project.title}</h3>
+                </div>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noreferrer" className="icon-button shrink-0" aria-label={`Open ${project.title}`}>
+                    <ExternalLink size={17} />
+                  </a>
+                )}
+              </div>
+              <dl className="mt-7 space-y-5 text-sm leading-6">
+                <div><dt>Challenge</dt><dd>{project.challenge}</dd></div>
+                <div><dt>What I built</dt><dd>{project.build}</dd></div>
+                <div className="result"><dt><Check size={14} /> Outcome</dt><dd>{project.outcome}</dd></div>
+              </dl>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {project.tools.map((tool) => <span key={tool} className="tag">{tool}</span>)}
+              </div>
+              {project.link && (
+                <a href={project.link} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-ink">
+                  View live project <ArrowRight size={14} />
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const capabilities = [
+  {
+    icon: Workflow,
+    title: "Automation architecture",
+    copy: "Map the process, connect the tools, and build workflows with clear handoffs and safeguards.",
+    tools: "n8n · Make · webhooks · Google OAuth",
+  },
+  {
+    icon: MessageCircle,
+    title: "Conversational systems",
+    copy: "Build WhatsApp journeys for bookings, lead capture, updates, and structured data collection.",
+    tools: "WhatsApp API · Manychat · AI agents",
+  },
+  {
+    icon: Bot,
+    title: "Applied AI",
+    copy: "Use language models where they genuinely improve classification, generation, retrieval, or decisions.",
+    tools: "Claude API · Gemini API · prompt engineering",
+  },
+  {
+    icon: Layers3,
+    title: "Low-code business tools",
+    copy: "Create dashboards, CRMs, and operational views that teams can adopt without unnecessary complexity.",
+    tools: "AppSheet · Google Sheets · Lovable",
+  },
+  {
+    icon: Code2,
+    title: "Web development",
+    copy: "Design and develop responsive interfaces backed by sound software engineering fundamentals.",
+    tools: "React · Vite · JavaScript · PHP · Tailwind",
+  },
+  {
+    icon: Database,
+    title: "Data foundations",
+    copy: "Structure information for reliable workflows, reporting, and future system growth.",
+    tools: "MySQL · Python · Pandas · Google Sheets",
+  },
+];
+
+function Capabilities() {
+  return (
+    <section id="capabilities" className="section border-y border-line bg-surface">
+      <div className="shell">
+        <div className="section-heading">
+          <div><p className="kicker">Capabilities</p><h2>One partner across the workflow.</h2></div>
+          <p>I work across automation logic, AI, data, and the interface people actually use—so the complete system makes sense.</p>
+        </div>
+        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {capabilities.map(({ icon: Icon, title, copy, tools }) => (
+            <article key={title} className="capability-card">
+              <span className="capability-icon"><Icon size={20} /></span>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+              <p className="mt-auto border-t border-line pt-4 font-mono text-xs text-muted">{tools}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -80,177 +331,51 @@ function Hero() {
 }
 
 function About() {
-  const bring = ["Business-focused problem solving", "AI automation", "API & system integrations", "Full-stack development", "Workflow design", "Database-driven applications"];
+  const credentials = [
+    "Prompt Engineering — Vanderbilt University",
+    "RPA Fundamentals — TDRA Virtual Academy",
+    "Transforming Tasks with AI — TDRA Virtual Academy",
+    "Critical Thinking & Problem Solving — Skyline University",
+  ];
   return (
-    <section id="about" className="section grid gap-12 md:grid-cols-2">
-      <div>
-        <p className="eyebrow">About</p>
-        <h2 className="mt-3 text-3xl font-semibold md:text-4xl">Software engineering meets practical automation.</h2>
-      </div>
-      <div>
-        <p className="text-muted">
-          I'm a Software Engineering student and AI automation specialist focused on building practical digital systems
-          that solve real business problems. I work across automation, APIs, databases, AI integrations, web applications,
-          and workflow systems. Rather than building technology for its own sake, I start by understanding the process —
-          then design the system around it.
-        </p>
-        <h3 className="mt-8 text-sm font-semibold">What I bring</h3>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-          {bring.map((b) => (
-            <li key={b} className="flex items-center gap-2 text-sm text-muted"><Check size={14} className="text-accent" />{b}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-function Manual() {
-  const items = ["Copying customer information between platforms", "Manually processing receipts and invoices", "Responding to repetitive WhatsApp inquiries", "Updating spreadsheets by hand", "Sending repetitive follow-up messages", "Searching through documents for information", "Moving information between different systems"];
-  return (
-    <section className="border-y border-line bg-surface">
-      <div className="section">
-        <h2 className="text-3xl font-semibold md:text-4xl">Is your business still doing this manually?</h2>
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((i) => (
-            <div key={i} className="rounded-lg border border-line bg-bg px-4 py-3 text-sm text-muted">{i}</div>
-          ))}
+    <section id="about" className="section bg-bg">
+      <div className="shell grid gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20">
+        <div>
+          <p className="kicker">About</p>
+          <h2 className="mt-3 text-4xl font-semibold leading-tight text-ink">Engineering discipline, founder mindset.</h2>
+          <p className="mt-6 leading-7 text-muted">
+            I run Next Level AI Automation &amp; Services while completing my final year of Software Engineering. That combination shapes how I work: I care about sound systems, but I also know the solution has to be useful, understandable, and worth implementing.
+          </p>
+          <p className="mt-4 leading-7 text-muted">
+            I enjoy finding the point where a process breaks down—repetitive messages, scattered records, manual dispatch—and building the practical tool that fixes it.
+          </p>
+          <div className="mt-8 flex gap-3">
+            <ActionLink href="#contact">Work with me <ArrowRight size={15} /></ActionLink>
+          </div>
         </div>
-        <p className="mt-10 text-lg">These are the kinds of processes I build systems to automate.</p>
-      </div>
-    </section>
-  );
-}
-
-function Services() {
-  const s = [
-    { icon: Bot, t: "AI Business Automation", d: "Automate repetitive business processes using AI, workflows, APIs, and connected business tools." },
-    { icon: MessageCircle, t: "WhatsApp & Conversational Automation", d: "Build intelligent WhatsApp and web-based workflows for lead qualification, customer support, data collection, and internal processes." },
-    { icon: Workflow, t: "Workflow & API Integrations", d: "Connect the tools your business already uses and automate the movement of information between them." },
-    { icon: LayoutGrid, t: "Custom Web Applications", d: "Build responsive, database-powered web applications and internal tools designed around specific business needs." },
-    { icon: FileSearch, t: "AI-Powered Internal Tools", d: "Turn documents, messages, forms, and business data into useful automated systems, dashboards, and decision-support tools." },
-  ];
-  return (
-    <section id="services" className="section">
-      <p className="eyebrow">Services</p>
-      <h2 className="mt-3 text-3xl font-semibold md:text-4xl">What I can build for you</h2>
-      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {s.map(({ icon: I, t, d }) => (
-          <div key={t} className="card">
-            <I className="text-accent" size={22} />
-            <h3 className="mt-4 font-semibold">{t}</h3>
-            <p className="mt-2 text-sm text-muted">{d}</p>
+        <div className="border-l border-line pl-6 sm:pl-10">
+          <div className="timeline-item">
+            <span className="timeline-icon"><BriefcaseBusiness size={17} /></span>
+            <p className="kicker">Now</p>
+            <h3>Founder &amp; Automation Developer</h3>
+            <p className="meta">Next Level AI Automation &amp; Services · Ras Al Khaimah</p>
+            <p>Designing automation systems, chatbots, websites, and low-code business tools for real operating needs.</p>
           </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-type Project = { t: string; cat: string; filter: string; label: string; problem: string; solution: string; tech: string[]; flow: string[]; highlight: string };
-const projects: Project[] = [
-  { t: "AI Lead Qualification & WhatsApp Automation", cat: "AI Automation", filter: "AI Automation", label: "Automation Demo", problem: "Businesses lose time manually responding to inquiries, collecting details, and qualifying leads.", solution: "A workflow that captures inquiries, uses AI to categorise the conversation, collects details, qualifies the lead and routes it into the right system.", tech: ["n8n", "WhatsApp Business API", "AI APIs", "Webhooks", "CRM / Database"], flow: ["WhatsApp", "AI classify", "n8n", "CRM"], highlight: "Automated lead intake and qualification" },
-  { t: "AI Construction Expense Automation", cat: "Business Automation", filter: "Business Systems", label: "Case Study", problem: "Construction expenses are hard to track when receipts and messages are handled manually.", solution: "Receives expenses via WhatsApp, extracts structured data with AI, stores it in a database and makes it available for reporting.", tech: ["WhatsApp", "n8n", "AI", "Database", "Google Sheets"], flow: ["WhatsApp", "AI extraction", "Database", "Reporting"], highlight: "WhatsApp → AI extraction → database → reporting" },
-  { t: "AI Knowledge Assistant", cat: "AI + RAG", filter: "AI Projects", label: "Prototype", problem: "Useful information is scattered across documents, making it slow to find.", solution: "An AI assistant that retrieves relevant information from a structured knowledge base and gives contextual answers.", tech: ["LLM", "RAG", "Embeddings", "Vector DB", "APIs"], flow: ["Documents", "Embeddings", "Vector DB", "LLM answer"], highlight: "Turn business knowledge into an accessible AI assistant" },
-  { t: "AI Appointment & Customer Workflow", cat: "AI Automation", filter: "AI Automation", label: "Automation Demo", problem: "Appointment handling involves repetitive messages, scheduling, confirmations and follow-ups.", solution: "An automated workflow that handles inquiries, collects details, manages booking steps and triggers follow-ups.", tech: ["AI", "n8n", "APIs", "Webhooks", "Database"], flow: ["Inquiry", "AI", "Booking", "Follow-up"], highlight: "Automated customer communication and follow-up" },
-  { t: "AI Document & Receipt Processing", cat: "AI + Automation", filter: "AI Projects", label: "Prototype", problem: "Manually entering data from invoices and receipts is repetitive and error-prone.", solution: "Receives a document, extracts structured data with AI/OCR, validates it and sends it into the right workflow or database.", tech: ["AI/OCR", "n8n", "APIs", "Database"], flow: ["Document", "AI/OCR", "Validate", "Database"], highlight: "Document → structured data → automated workflow" },
-  { t: "Business Operations Dashboard", cat: "Web Application", filter: "Web Applications", label: "Concept", problem: "Data spread across spreadsheets and tools makes operations hard to read at a glance.", solution: "A centralised dashboard presenting business data through clear visualisations and summaries.", tech: ["React", "Database", "APIs", "Charts"], flow: ["Sources", "API", "Database", "Dashboard"], highlight: "Centralised business visibility" },
-];
-
-function Projects() {
-  const filters = ["All", "AI Automation", "Business Systems", "Web Applications", "AI Projects"];
-  const [f, setF] = useState("All");
-  const list = projects.filter((p) => f === "All" || p.filter === f);
-  return (
-    <section id="projects" className="section">
-      <p className="eyebrow">Featured Work</p>
-      <h2 className="mt-3 text-3xl font-semibold md:text-4xl">Problems, systems, results</h2>
-      <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
-        {filters.map((x) => (
-          <button key={x} aria-pressed={f === x} onClick={() => setF(x)}
-            className={`rounded-full border px-4 py-1.5 text-sm transition ${f === x ? "border-accent bg-accent text-accent-fg" : "border-line text-muted hover:text-fg"}`}>
-            {x}
-          </button>
-        ))}
-      </div>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {list.map((p) => (
-          <article key={p.t} className="card flex flex-col">
-            <div className="flex items-center justify-between gap-2">
-              <span className="eyebrow">{p.cat}</span>
-              <span className="chip">{p.label}</span>
-            </div>
-            <h3 className="mt-3 text-xl font-semibold">{p.t}</h3>
-            <dl className="mt-4 space-y-3 text-sm">
-              <div><dt className="font-medium">The problem</dt><dd className="text-muted">{p.problem}</dd></div>
-              <div><dt className="font-medium">The system</dt><dd className="text-muted">{p.solution}</dd></div>
-            </dl>
-            <div className="mt-5 rounded-lg border border-line bg-bg p-3">
-              <p className="font-mono text-[11px] text-muted">The automation</p>
-              <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                {p.flow.map((s, i) => (
-                  <span key={s} className="flex items-center gap-1.5">
-                    <span className="chip text-fg">{s}</span>
-                    {i < p.flow.length - 1 && <ArrowRight size={12} className="text-accent" />}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <p className="mt-4 text-sm"><span className="font-medium">The result: </span><span className="text-accent">{p.highlight}</span></p>
-            <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
-              {p.tech.map((t) => <span key={t} className="chip">{t}</span>)}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Skills() {
-  const g: Record<string, string[]> = {
-    "AI & Automation": ["AI APIs", "LLM workflows", "Prompt engineering", "RAG", "AI agents", "n8n", "Workflow automation"],
-    "Backend & APIs": ["REST APIs", "Webhooks", "JSON", "API integrations", "Authentication", "OAuth"],
-    Databases: ["PostgreSQL", "Supabase", "SQL", "Database design"],
-    "Web Development": ["React", "JavaScript", "HTML", "CSS", "Responsive design"],
-    "Tools & Platforms": ["Git", "GitHub", "Vercel", "Postman", "Google Sheets", "WhatsApp Business Platform"],
-  };
-  return (
-    <section id="skills" className="section">
-      <p className="eyebrow">Skills</p>
-      <h2 className="mt-3 text-3xl font-semibold md:text-4xl">Technical toolkit</h2>
-      <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {Object.entries(g).map(([k, v]) => (
-          <div key={k} className="card">
-            <h3 className="font-semibold">{k}</h3>
-            <div className="mt-4 flex flex-wrap gap-2">{v.map((s) => <span key={s} className="chip text-fg">{s}</span>)}</div>
+          <div className="timeline-item mt-10">
+            <span className="timeline-icon"><GraduationCap size={17} /></span>
+            <p className="kicker">2022 — Present</p>
+            <h3>Bachelor in Software Engineering</h3>
+            <p className="meta">University of Bolton (University of Greater Manchester), Ras Al Khaimah campus</p>
+            <p>Building a full-stack foundation across software design, databases, web development, mobile applications, and applied machine learning.</p>
           </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Process() {
-  const steps = [
-    ["Understand", "Understand the existing business process and identify repetitive or inefficient steps."],
-    ["Design", "Map the workflow, data flow, integrations, and automation logic."],
-    ["Build", "Connect APIs, AI, databases, business tools, and user interfaces into a working system."],
-    ["Improve", "Test the workflow, handle edge cases, monitor failures, and refine the system."],
-  ];
-  return (
-    <section className="border-y border-line bg-surface">
-      <div className="section">
-        <p className="eyebrow">Process</p>
-        <h2 className="mt-3 text-3xl font-semibold md:text-4xl">How I Approach Automation</h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-4">
-          {steps.map(([t, d], i) => (
-            <div key={t} className="border-t border-accent pt-4">
-              <p className="font-mono text-sm text-accent">0{i + 1}</p>
-              <h3 className="mt-2 font-semibold">{t}</h3>
-              <p className="mt-2 text-sm text-muted">{d}</p>
-            </div>
-          ))}
+          <div className="mt-10 border-t border-line pt-8">
+            <p className="kicker">Continued learning</p>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {credentials.map((credential) => (
+                <li key={credential} className="flex items-start gap-2 text-sm text-muted"><ChevronRight size={15} className="mt-0.5 shrink-0 text-primary" />{credential}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -259,64 +384,88 @@ function Process() {
 
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  async function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setStatus("sending");
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
     try {
-      const r = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...data, _subject: "New portfolio inquiry" }),
+        body: JSON.stringify({ ...data, _subject: "New portfolio project inquiry" }),
       });
-      if (!r.ok) throw new Error();
+      if (!response.ok) throw new Error("Submission failed");
+      form.reset();
       setStatus("sent");
-      e.currentTarget?.reset();
     } catch {
       setStatus("error");
     }
   }
-  const input = "w-full rounded-md border border-line bg-bg px-3 py-2.5 text-sm outline-none focus:border-accent";
+
   return (
-    <section id="contact" className="section grid gap-12 md:grid-cols-2">
-      <div>
-        <p className="eyebrow">Contact</p>
-        <h2 className="mt-3 text-3xl font-semibold md:text-5xl">Let's build a smarter workflow.</h2>
-        <p className="mt-5 text-muted">Have a repetitive process, manual task, or business workflow that could be automated? Let's turn it into a practical system.</p>
-        <a href={`mailto:${EMAIL}`} className="mt-8 inline-flex items-center gap-2 text-sm hover:text-accent"><Mail size={16} />{EMAIL}</a>
-        <div className="mt-5 flex items-center gap-4">
-          <a href="https://www.linkedin.com/in/tayyaba-shakeel-bb8a00253" target="_blank" rel="noreferrer" aria-label="LinkedIn"
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent">
-            <Linkedin size={18} /> LinkedIn
-          </a>
-          <a href="https://github.com/tayyaba-2002" target="_blank" rel="noreferrer" aria-label="GitHub"
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent">
-            <Github size={18} /> GitHub
-          </a>
+    <section id="contact" className="bg-ink text-ink-inverse">
+      <div className="shell grid gap-12 py-20 lg:grid-cols-[.9fr_1.1fr] lg:gap-20 lg:py-28">
+        <div>
+          <p className="kicker text-primary-soft">Start a conversation</p>
+          <h2 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">Where is manual work slowing you down?</h2>
+          <p className="mt-6 max-w-lg text-lg leading-8 text-ink-inverse/65">
+            Tell me what your team repeats, copies, chases, or manages by hand. I’ll help you think through what a practical system could look like.
+          </p>
+          <div className="mt-9 space-y-4 text-sm">
+            <a className="contact-link" href={`mailto:${EMAIL}`}><Mail size={17} />{EMAIL}</a>
+            <a className="contact-link" href="tel:+971567339277"><Phone size={17} />+971 56 733 9277</a>
+            <p className="contact-link"><MapPin size={17} />Ras Al Khaimah, UAE</p>
+          </div>
+        </div>
+        <form onSubmit={submit} className="rounded-md border border-ink-inverse/15 bg-ink-elevated p-6 sm:p-8">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <label className="field-label">Name<input name="name" required className="field" placeholder="Your name" /></label>
+            <label className="field-label">Work email<input name="email" type="email" required className="field" placeholder="you@company.com" /></label>
+          </div>
+          <label className="field-label mt-5">What would you like to improve?<textarea name="message" rows={5} required className="field resize-none" placeholder="Tell me about the workflow or problem…" /></label>
+          <button type="submit" disabled={status === "sending"} className="action action-primary mt-6 w-full justify-center disabled:cursor-wait disabled:opacity-60">
+            {status === "sending" ? "Sending…" : "Send project inquiry"} <ArrowRight size={15} />
+          </button>
+          <div aria-live="polite" className="mt-4 min-h-5 text-sm">
+            {status === "sent" && <p className="text-primary-soft">Thank you—your message has been sent.</p>}
+            {status === "error" && <p className="text-warning">The form could not send. Please email me directly.</p>}
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-ink-inverse/10 bg-ink text-ink-inverse">
+      <div className="shell flex flex-col gap-5 py-7 text-sm text-ink-inverse/55 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} Tayyaba Shakeel</p>
+        <div className="flex items-center gap-5">
+          <a href={LINKEDIN} target="_blank" rel="noreferrer" className="hover:text-ink-inverse">LinkedIn</a>
+          <a href={GITHUB} target="_blank" rel="noreferrer" className="hover:text-ink-inverse">GitHub</a>
+          <a href={resumeAsset.url} target="_blank" rel="noreferrer" className="hover:text-ink-inverse">Résumé</a>
         </div>
       </div>
-      <form onSubmit={submit} className="card space-y-4 hover:border-line">
-        <label className="block text-sm">Name<input name="name" required className={`${input} mt-1`} /></label>
-        <label className="block text-sm">Email<input name="email" type="email" required className={`${input} mt-1`} /></label>
-        <label className="block text-sm">What would you like to automate?<textarea name="message" rows={5} required className={`${input} mt-1`} /></label>
-        <button disabled={status === "sending"} className="btn-primary w-full justify-center disabled:opacity-60">
-          {status === "sending" ? "Sending…" : "Start a Conversation"} <ArrowDown size={14} className="-rotate-90" />
-        </button>
-        {status === "sent" && <p className="text-sm text-accent">Thanks — your message was sent.</p>}
-        {status === "error" && <p className="text-sm text-muted">Something went wrong. Please email me directly.</p>}
-      </form>
-    </section>
+    </footer>
   );
 }
 
 export default function App() {
   return (
     <>
-      <Nav />
+      <Navigation />
       <main>
-        <Hero /><About /><Manual /><Services /><Projects /><Process /><Skills /><Contact />
+        <Hero />
+        <ProofStrip />
+        <Work />
+        <Capabilities />
+        <About />
+        <Contact />
       </main>
-      <footer className="border-t border-line py-8 text-center text-xs text-muted">© {new Date().getFullYear()} Tayyaba Shakeel</footer>
+      <Footer />
     </>
   );
 }
