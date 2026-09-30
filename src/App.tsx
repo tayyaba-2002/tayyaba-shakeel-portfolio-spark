@@ -26,7 +26,7 @@ import {
 import resumeAsset from "./assets/resume.pdf.asset.json";
 
 const EMAIL = "Tayyabashakeel2002@gmail.com";
-const PHOTO = "https://i.imgur.com/2bVpLsq.jpeg";
+const PHOTO = photoAsset.url;
 const LINKEDIN = "https://www.linkedin.com/in/tayyaba-shakeel-bb8a00253";
 const GITHUB = "https://github.com/tayyaba-2002";
 
