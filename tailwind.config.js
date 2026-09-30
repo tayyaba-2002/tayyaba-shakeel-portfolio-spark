@@ -14,6 +14,7 @@ export default {
         line: "hsl(var(--line))",
         ink: "hsl(var(--ink))",
         "ink-elevated": "hsl(var(--ink-elevated))",
+        panel: "hsl(var(--panel))",
         "ink-inverse": "hsl(var(--ink-inverse))",
         muted: "hsl(var(--muted))",
         primary: "hsl(var(--primary))",

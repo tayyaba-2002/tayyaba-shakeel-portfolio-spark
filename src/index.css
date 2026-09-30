@@ -3,18 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --bg: 42 33% 98%;
-  --surface: 210 25% 96%;
-  --line: 215 19% 87%;
-  --ink: 222 47% 12%;
-  --ink-elevated: 220 35% 17%;
+  --bg: 0 0% 2%;
+  --surface: 220 14% 7%;
+  --line: 220 12% 16%;
+  --ink: 210 40% 96%;
+  --ink-elevated: 222 28% 10%;
   --ink-inverse: 42 33% 98%;
-  --muted: 215 16% 43%;
-  --primary: 217 79% 48%;
+  --panel: 222 32% 5%;
+  --muted: 217 12% 64%;
+  --primary: 217 79% 52%;
   --primary-soft: 207 94% 70%;
-  --success: 158 68% 34%;
+  --success: 158 60% 45%;
   --warning: 23 92% 69%;
-  --shadow-lift: 0 18px 50px -28px hsl(222 47% 12% / 0.35);
+  --shadow-lift: 0 18px 50px -28px hsl(0 0% 0% / 0.9);
 }
 
 * { box-sizing: border-box; }
@@ -44,7 +45,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .text-link { @apply inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-primary; }
 
 .action { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-bold outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2; }
-.action-primary { @apply bg-primary text-ink-inverse hover:bg-ink; }
+.action-primary { @apply bg-primary text-ink-inverse hover:bg-ink-elevated; }
 .action-secondary { @apply border border-line bg-bg text-ink hover:border-ink; }
 .action-quiet { @apply bg-surface text-ink hover:bg-line; }
 
@@ -71,7 +72,7 @@ dl .result dt { @apply flex items-center gap-2 text-success; }
 
 .contact-link { @apply flex items-center gap-3 text-ink-inverse/70 hover:text-ink-inverse; }
 .field-label { @apply block text-sm font-semibold text-ink-inverse/80; }
-.field { @apply mt-2 w-full rounded-md border border-ink-inverse/15 bg-ink px-3.5 py-3 text-sm font-normal text-ink-inverse outline-none placeholder:text-ink-inverse/35 focus:border-primary-soft focus:ring-1 focus:ring-primary-soft; }
+.field { @apply mt-2 w-full rounded-md border border-ink-inverse/15 bg-bg px-3.5 py-3 text-sm font-normal text-ink-inverse outline-none placeholder:text-ink-inverse/35 focus:border-primary-soft focus:ring-1 focus:ring-primary-soft; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
