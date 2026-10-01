@@ -66,7 +66,7 @@ function Navigation() {
     <header className="sticky top-0 z-50 border-b border-line/80 bg-bg/90 backdrop-blur-xl">
       <div className="shell flex h-16 items-center justify-between">
         <a href="#top" className="flex items-center gap-2 font-display text-sm font-bold text-ink" aria-label="Tayyaba Shakeel, home">
-          <span className="grid size-8 place-items-center rounded-md bg-ink text-xs text-ink-inverse">TS</span>
+          <span className="grid size-8 place-items-center rounded-md bg-panel text-xs text-ink-inverse">TS</span>
           <span className="hidden sm:inline">Tayyaba Shakeel</span>
         </a>
         <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
@@ -122,12 +122,12 @@ function Hero() {
         <div className="relative mx-auto w-full max-w-md lg:mr-0">
           <div className="portrait-frame">
             <img src={PHOTO} alt="Tayyaba Shakeel" className="h-full w-full object-cover object-top" />
-            <div className="absolute inset-x-4 bottom-4 rounded-md bg-ink/90 p-4 text-ink-inverse backdrop-blur">
+            <div className="absolute inset-x-4 bottom-4 rounded-md bg-panel/90 p-4 text-ink-inverse backdrop-blur">
               <p className="text-sm font-semibold">Automation Specialist · UAE</p>
               <p className="mt-1 text-xs text-ink-inverse/70">Software Engineering · Ras Al Khaimah</p>
             </div>
           </div>
-          <div className="absolute -bottom-6 -left-5 hidden w-56 rounded-md border border-line bg-bg p-4 shadow-lift sm:block">
+          <div className="mt-3 w-full rounded-md border border-line bg-bg p-4 shadow-lift sm:ml-5 sm:w-56">
             <p className="kicker">Current focus</p>
             <p className="mt-2 text-sm font-semibold text-ink">WhatsApp · AI · workflows</p>
           </div>
@@ -145,7 +145,7 @@ function ProofStrip() {
     ["04", "Client-ready", "Systems designed to be practical, understandable, and usable."],
   ];
   return (
-    <section aria-label="Working principles" className="border-b border-line bg-ink text-ink-inverse">
+    <section aria-label="Working principles" className="border-b border-line bg-panel text-ink-inverse">
       <div className="shell grid sm:grid-cols-2 lg:grid-cols-4">
         {items.map(([number, title, detail]) => (
           <div key={number} className="border-b border-ink-inverse/10 py-6 sm:border-r sm:px-6 sm:first:pl-0 lg:border-b-0">
@@ -177,6 +177,15 @@ const projects: Project[] = [
     build: "An end-to-end workflow connecting a webhook, Google Sheets lookup, AI agent, WhatsApp response, and booking confirmation.",
     outcome: "A connected booking workflow that turns incoming WhatsApp conversations into structured booking actions.",
     tools: ["n8n", "WhatsApp API", "Google Sheets", "AI agent"],
+  },
+  {
+    title: "Social Pulse — YouTube Analytics Dashboard",
+    type: "Live project",
+    challenge: "Creators and marketers want a fast way to see any public YouTube channel's key stats without digging through YouTube Studio.",
+    build: "A responsive web app that pulls live channel data via the YouTube Data API — subscribers, views, video count, estimated revenue — and renders it as an interactive analytics dashboard with charts for growth, engagement, audience age, and revenue sources.",
+    outcome: "A live, publicly usable analytics tool.",
+    tools: ["JavaScript", "HTML", "CSS", "YouTube Data API", "Vercel"],
+    link: "https://social-pulse-nine.vercel.app/",
   },
   {
     title: "Camaro Taxi Dispatch System",
@@ -393,7 +402,7 @@ function About() {
           </div>
           <div className="timeline-item mt-10">
             <span className="timeline-icon"><GraduationCap size={17} /></span>
-            <p className="kicker">2022 – Present</p>
+            <p className="kicker">2022 – 2027</p>
             <h3>Bachelor in Software Engineering</h3>
             <p className="meta">University of Bolton (University of Greater Manchester), Ras Al Khaimah campus</p>
             <p>Building a full-stack foundation across software design, databases, web development, mobile applications, and applied machine learning.</p>
@@ -435,7 +444,7 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-ink text-ink-inverse">
+    <section id="contact" className="bg-panel text-ink-inverse">
       <div className="shell grid gap-12 py-20 lg:grid-cols-[.9fr_1.1fr] lg:gap-20 lg:py-28">
         <div>
           <p className="kicker text-primary-soft">Start a conversation</p>
@@ -470,7 +479,7 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-ink-inverse/10 bg-ink text-ink-inverse">
+    <footer className="border-t border-ink-inverse/10 bg-panel text-ink-inverse">
       <div className="shell flex flex-col gap-5 py-7 text-sm text-ink-inverse/55 sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} Tayyaba Shakeel · Automation Specialist | Software Engineer</p>
         <div className="flex items-center gap-5">
